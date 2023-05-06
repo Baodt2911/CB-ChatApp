@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App | CB</title>
+    <link rel="stylesheet" href="./css/output.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="../src/firebase.js" async defer></script>
+</head>
+
+<body>
+    <main
+        class=" w-full h-screen bg-gradient-to-l from-color-gradient-1 to-color-gradient-2 font-saira flex items-center justify-center lg:py-20 ">
+        <div class="content lg:w-3/4 w-full h-full  rounded-xl  flex items-center">
+            <div class="basis-1/3  h-full bg-primary-color rounded-s-xl text-white">
+                <div class="w-full ">
+                    <button
+                        class="btn-logout border border-gray-400 py-1 px-5 rounded-sm lg:ml-7 lg:my-6 ml-3 my-4">Đăng
+                        xuất</button>
+                    <div
+                        class="avatar relative w-32 h-32 lg:w-40 lg:h-40 border-2 border-gray-300 rounded-full mx-auto after:absolute after:bottom-3 after:right-3 after:w-5 after:h-5 after:rounded-full after:bg-green-400 z-10  after:border-2 after:border-white">
+                        <img src="" alt="avatar" class="bdt-images bg-white">
+                    </div>
+                    <p class="name text-2xl font-semibold text-center mt-5">Đỗ Bảo</p>
+                </div> <!--END PROFILE-->
+                <div class="w-full p-2 lg:p-0 lg:w-3/4  mx-auto  mt-4">
+                    <div class="group-chat  w-full max-h-96 overflow-auto flex flex-col items-center gap-6 scrollbar-none scrollbar-thumb-transparent
+                        ">
+                        <div
+                            class="item-chat relative w-full h-14 flex items-center lg:gap-5 gap-3  cursor-pointer rounded-md bg-white text-black py-2 px-2">
+                            <div class="relative avatar-group-chat basis-1/6 lg:basis-1/5 h-full">
+                                <div
+                                    class="bdt-group-images lg:top-0 lg:left-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0">
+                                    <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/gai-xinh-toc-dai.jpg"
+                                        alt="group-avatar" class="bdt-images">
+                                </div>
+                                <div class="bdt-group-images bottom-0 right-0 lg:block hidden">
+                                    <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/08/anh-trai-dep.jpg"
+                                        alt="group-avatar" class="bdt-images">
+                                </div>
+                            </div>
+                            <div class="title-group-chat lg:basis-2/3 basis-3/4 ">
+                                <p
+                                    class="w-52 name-group text-xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
+                                    Nhóm bất hảo</p>
+                                <div class="flex items-center justify-between">
+                                    <p
+                                        class="w-40 text-sm font-sans font-thin text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">
+                                        Chào bạn</p>
+                                    <span class="text-xs">12:53</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis-vertical cursor-pointer " title="Option"></i>
+                        </div>
+                    </div>
+                    <div class="grid lg:grid-cols-2 lg:gap-2 grid-cols-1 grid-row-2 gap-0">
+                        <button class="border-none bg-primary-button text-white  py-2 px-4  rounded-sm mt-3"><i
+                                class="fa-solid fa-plus mr-2"></i>
+                            Tạo nhóm chat mới</button>
+                        <button class="border-none bg-primary-button text-white  py-2 px-4  rounded-sm mt-3"><i
+                                class="fa-solid fa-plus mr-2"></i>
+                            Vào nhóm</button>
+                    </div>
+                </div> <!--END Group Chat-->
+            </div>
+            <div class="relative  basis-4/6  h-full bg-white rounded-e-xl flex flex-col ">
+                <header class="w-full basis-[10%] border-b-2 border-gray-200 flex items-center">
+                    <div class=" lg:basis-3/4 basis-[65%] h-full flex items-center gap-3 ml-3">
+                        <div class="lg:w-14 lg:h-14 w-12 h-12 rounded-full">
+                            <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/gai-xinh-toc-dai.jpg"
+                                alt="group-avatar" class="bdt-images">
+                        </div>
+                        <p class="text-2xl font-semibold tracking-widest">Nhóm bất hảo</p>
+                    </div>
+                    <div class="flex-grow h-full flex items-center justify-between ">
+                        <div
+                            class="border border-gray-200 py-2 px-4 text-gray-500 cursor-pointer hover:text-black hover:border-black transition duration-500">
+                            <i class="fa-solid fa-user-plus text-xl mr-2 "></i>Mời
+                        </div>
+                        <div class="flex items-center cursor-pointer">
+                            <img class="w-10 h-10 rounded-full border-4 border-gray-300 object-cover"
+                                src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/gai-xinh-toc-dai.jpg" alt="">
+                            <img class="w-10 h-10 rounded-full border-4 border-gray-300 object-cover -translate-x-3"
+                                src="https://khoinguonsangtao.vn/wp-content/uploads/2022/08/anh-trai-dep.jpg" alt="">
+                            <div
+                                class="w-10 h-10 rounded-full border-4 border-gray-300 object-cover -translate-x-6  bg-yellow-300 flex items-center justify-center">
+                                +2
+                            </div>
+                        </div>
+                    </div>
+                </header> <!--END header-->
+                <div
+                    class="chat  basis-[83%] h-full  overflow-y-auto grid gap-10 py-6 scrollbar-thin scrollbar-thumb-[#dadada] ">
+                    <div class="you-send-message ">
+                        <div class="max-w-[50%]">
+                            <p class="name-you-user"> Đỗ Bảo</p>
+                            <section class="message-you ">
+                                mọi người đang làm gì thế
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium pariatur itaque
+                                nisi culpa veniam porro, minus facilis cupiditate? Nostrum corporis suscipit veniam
+                                distinctio recusandae nisi expedita mollitia deserunt error quod?
+                            </section>
+                        </div>
+                        <div class="avatar-message w-12 h-12 rounded-full ">
+                            <img src="" alt="avatar" class="bdt-images bg-gray-500">
+                        </div>
+                    </div>
+                    <div class="memmber-send-message ">
+                        <div class="w-12 h-12 rounded-full ">
+                            <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/gai-xinh-toc-dai.jpg"
+                                alt="avatar" class="bdt-images">
+                        </div>
+                        <div class="max-w-[50%] ">
+                            <p class="name-memmer-user">Đỗ Bảo</p>
+                            <section class="message-member">
+                                mọi người đang làm gì thế Lorem ipsum dolor sit amet, consectetur adipisicing elit.Fugit
+                                rem beatae, consequatur quisquam recusandae asperiores dolor! Molestiae quam et
+                                enim, libero maiores incidunt sapiente. Inventore harum excepturi qui natus saepe.
+                            </section>
+                        </div>
+                    </div>
+                    <div class="memmber-send-message ">
+                        <div class="w-12 h-12 rounded-full ">
+                            <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/gai-xinh-toc-dai.jpg"
+                                alt="avatar" class="bdt-images">
+                        </div>
+                        <div class="max-w-[50%] ">
+                            <p class="name-memmer-user">Đỗ Bảo</p>
+                            <section class="message-member">
+                                Trong ví dụ này, chúng ta sử dụng lớp overflow-y-scroll để cho phép phần tử có thanh
+                                cuộn, và sử dụng các lớp scrollbar-thin, scrollbar-thumb-gray-300 và
+                                scrollbar-track-gray-100 để tạo custom scroll bar.
+
+                                Lớp scrollbar-thin sẽ tạo thanh cuộn mỏng hơn mặc định, lớp scrollbar-thumb-gray-300 sẽ
+                                tạo nút cuộn với màu xám nhạt, và lớp scrollbar-track-gray-100 sẽ tạo một dải cuộn với
+                                màu xám nhạt. Bạn có thể sử dụng các giá trị khác để tùy chỉnh màu sắc và kiểu dáng của
+                                custom scroll bar.
+
+                                Hy vọng điều này có thể giúp bạn tạo custom scroll bar bằng Tailwind CSS!
+                            </section>
+                        </div>
+                    </div>
+                    <div class="memmber-send-message ">
+                        <div class="w-12 h-12 rounded-full ">
+                            <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/gai-xinh-toc-dai.jpg"
+                                alt="avatar" class="bdt-images">
+                        </div>
+                        <div class="max-w-[50%] ">
+                            <p class="name-memmer-user">Đỗ Bảo</p>
+                            <section class="message-member">
+                                Khi sử dụng thuộc tính này, CSS sẽ căn đều các từ trong văn bản, trừ các dòng cuối cùng,
+                                để tạo thành các hàng có độ rộng bằng nhau. Điều này giúp văn bản dễ đọc hơn và giảm
+                                khoảng cách giữa các từ.
+                            </section>
+                        </div>
+                    </div>
+                </div><!--END CHAT-->
+                <div class=" w-full basis-[7%] border-t border-gray-200 flex items-center justify-between pr-4">
+                    <input type="text" wrap="soft" placeholder="Nhập tin nhắn"
+                        class="w-full h-full outline-none border-none text-xl pl-6 z-10">
+                    <i class="fa-regular fa-paper-plane text-xl cursor-pointer hover:text-blue-400 ml-6"></i>
+                </div>
+            </div> <!--END CHAT-->
+        </div> <!--END CONTENT-->
+    </main> <!--END MAIN-->
+
+</body>
+
+</html>
