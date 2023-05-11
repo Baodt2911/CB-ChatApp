@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tailwindcss": "tailwindcss -i ./src/css/input.css -o ./public/css/output.css --watch"
+    "tailwindcss": "tailwindcss -i ./src/css/input.css -o ./public/css/output.css --watch",
+    "homepage": "./public/index.html"
   },
   "author": "Baodt2911",
   "license": "ISC",
