@@ -651,6 +651,10 @@ video {
   height: 100vh;
 }
 
+.h-\[100000px\]{
+  height: 100000px;
+}
+
 .max-h-96{
   max-height: 24rem;
 }
@@ -661,10 +665,6 @@ video {
 
 .max-h-full{
   max-height: 100%;
-}
-
-.max-h-\[90\%\]{
-  max-height: 90%;
 }
 
 .w-1\/2{
@@ -785,10 +785,6 @@ video {
 
 .items-center{
   align-items: center;
-}
-
-.justify-end{
-  justify-content: flex-end;
 }
 
 .justify-center{
@@ -1025,11 +1021,6 @@ video {
 .py-5{
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-}
-
-.py-6{
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
 }
 
 .pl-3{
@@ -1299,90 +1290,13 @@ video {
   }
 }
 
-.you-send-message{
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding-right: 1.25rem;
-}
-
-@media (min-width: 1024px){
-  .you-send-message{
-    gap: 1rem;
-  }
-}
-
-.memmber-send-message{
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-left: 1.25rem;
-}
-
-@media (min-width: 1024px){
-  .memmber-send-message{
-    gap: 1rem;
-  }
-}
-
-.name-you-user{
-  text-align: right;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
-.name-memmer-user{
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
-.message-you{
-  width: 100%;
-  overflow-wrap: break-word;
-  border-radius: 0.5rem;
-  background-color: #088395cc;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  text-align: justify;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.message-member{
-  width: 100%;
-  overflow-wrap: break-word;
-  border-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  text-align: justify;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .item-message{
   display: flex;
   width: 100%;
   align-items: flex-start;
   justify-content: flex-start;
   padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 @media (min-width: 1024px){
@@ -1401,17 +1315,17 @@ video {
 }
 
 .message-text{
-  width: 100%;
+  width: 90%;
   overflow-wrap: break-word;
   border-radius: 0.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 245 / var(--tw-bg-opacity));
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   text-align: justify;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   line-height: 1.75rem;
 }
 

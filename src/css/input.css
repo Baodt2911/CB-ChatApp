@@ -9,30 +9,12 @@
 .item-group-chat{
     @apply relative flex-grow-0 flex-shrink-0 w-full h-[65px] flex items-center lg:gap-2 gap-4  cursor-pointer rounded-md bg-white text-black py-1 px-2;
 }
-.you-send-message{
-    @apply w-full flex items-start justify-end  lg:gap-4 pr-5 ;
-}
-.memmber-send-message{
-    @apply w-full flex items-start justify-start  lg:gap-4 pl-5; 
-}
-.name-you-user{
-    @apply text-lg tracking-wider font-semibold text-gray-500 text-right;
-}
-.name-memmer-user{
-    @apply text-lg tracking-wider font-semibold text-gray-500 ;
-}
-.message-you{
-    @apply w-full  bg-[#088395cc] py-3 px-5 rounded-lg text-xl text-justify break-words text-white;
-}
-.message-member{
-    @apply w-full  bg-[#f5f5f5] py-3 px-5 rounded-lg text-xl text-justify break-words ;
-}
 .item-message{
-    @apply w-full flex items-start justify-start  lg:gap-4 pl-5; 
+    @apply w-full flex items-start justify-start  lg:gap-4 px-5 ; 
 }
 .name-message-user{
-    @apply text-lg tracking-wider font-semibold text-gray-500 ;
+    @apply  text-lg tracking-wider font-semibold text-gray-500 ;
 }
 .message-text{
-    @apply w-full  bg-[#f5f5f5] py-3 px-5 rounded-lg text-xl text-justify break-words ;
+    @apply w-[90%] bg-[#f5f5f5] py-2 px-5 rounded-lg text-lg text-justify  break-words ;
 }

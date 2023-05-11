@@ -1,8 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
 import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, onAuthStateChanged, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, onSnapshot, orderBy, query, where, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js"
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js"
+import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js"
 const firebaseConfig = {
     apiKey: "AIzaSyCLQMrKMIBQ1SSaVXnYOIA7xRWnaujqs3k",
     authDomain: "chat-app-db76c.firebaseapp.com",
@@ -13,7 +12,6 @@ const firebaseConfig = {
     measurementId: "G-XLGK7BY9GY"
 };
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app)
 const auth = getAuth();
 const storage = getStorage();
@@ -28,8 +26,6 @@ const FacebookProvider = new FacebookAuthProvider();
 const GoogleProvider = new GoogleAuthProvider()
 const avatarUser = document.querySelector(".avatar img")
 const nameUser = document.querySelector(".name")
-const avatarMessageUser = document.querySelectorAll(".avatar-message img")
-const nameMessageUser = document.querySelectorAll(".name-you-user")
 const cardLogin = document.querySelector(".login")
 const btnCreateGroup = document.querySelector(".btn-create-group")
 const btnJoinGroup = document.querySelector(".btn-join-group")
@@ -59,7 +55,7 @@ const cancelRoom = document.querySelector('.cancel-room')
 const sendMessage = document.querySelector('.message-send')
 const btnSendMessage = document.querySelector('.btn-send-message')
 const cardChat = document.querySelector('.chat')
-const currentMessage = document.querySelector('.currentMessage')
+const mainChat = document.querySelector('.main-chat')
 document.addEventListener("click", e => {
     if (btnOption.contains(e.target)) {
         cardOption.classList.remove("invisible")
@@ -77,6 +73,23 @@ document.addEventListener("click", e => {
         cardShowMembers.classList.add("invisible")
         cardShowMembers.classList.add("opacity-0")
     }
+})
+coppyCode.addEventListener("click", () => {
+    const isSupported = (cmd) => {
+        return document.queryCommandSupported(cmd);
+    };
+    const range = document.createRange(),
+        selection = window.getSelection();
+    selection.removeAllRanges();
+    range.selectNodeContents(codeGroup);
+    selection.addRange(range);
+    try {
+        if (isSupported("copy")) document.execCommand("copy");
+        else alert(`execCommand("copy") is not supported in your browser.`);
+    } catch (e) {
+        console.log(e);
+    }
+    selection.removeAllRanges();
 })
 const handleAddFirestore = async (providerId, user) => {
     let isAddDocs = true
@@ -280,26 +293,36 @@ getCurrentUser((currentUser) => {
             const datas = querySnapshot.docs.map(doc => ({
                 ...doc.data(),
             }))
+            // console.log(datas[0].roomCode);
             const html = datas.map(data =>
-                `<div class="item-message ">
-                <div class=" w-12 h-12 rounded-full">
+                `<div class="item-message py-5 " data-id=${data.uid}>
+                <div class="avatar-user-message w-12 h-12 rounded-full ">
                     <img src=${data.photoURL} alt="avatar" class="bdt-images ">
                 </div>
-                <div class="max-w-[50%]">
+                <div class="title-message  max-w-[50%]">
                     <p class="name-message-user">${data.displayName}</p>
-                    <div class="flex items-center gap-4">
-                        <section class="message-text">
+                    <div class="message-card w-full flex items-center  gap-4">
+                        <section class="message-text" >
                             ${data.text}
                         </section>
-                        <span class="time-send font-medium opacity-75">${formatDate(data.createdAt.seconds)}</span>
+                        <span class="time-send font-normal text-sm  font-sans opacity-75">${formatDate(data.createdAt.seconds)}</span>
                     </div>
                 </div>
             </div>`
             )
             cardChat.innerHTML = html.join('')
+            const uidMessageEqualuidUser = document.querySelectorAll(".item-message")
+            uidMessageEqualuidUser.forEach(message => {
+                if (message.dataset.id == currentUser.uid) {
+                    message.style.justifyContent = "end"
+                    message.querySelector(".avatar-user-message").style.order = "2"
+                    message.querySelector(".name-message-user").style = 'text-align:right'
+                    message.querySelector(".message-text").style = "color:#fff;background:#088395cc;order:2"
+                }
+            })
+            mainChat.scrollTo({ top: mainChat.scrollHeight, behavior: 'smooth' });
         })
     }
-
     const handleJoinRoom = () => {
         const roomCode = codeGroupJoin.value.toUpperCase()
         getDataWithRoomCode(roomCode, async (data) => {
@@ -349,6 +372,7 @@ getCurrentUser((currentUser) => {
             uid: currentUser.uid
         })
         sendMessage.value = ''
+        mainChat.scrollTo({ top: mainChat.scrollHeight, behavior: 'smooth' });
     }
     btnSendMessage.addEventListener('click', handleSendMessage)
     sendMessage.addEventListener("keypress", (e) => {
