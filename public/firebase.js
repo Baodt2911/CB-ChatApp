@@ -77,7 +77,7 @@ document.addEventListener("click", e => {
 coppyCode.addEventListener("click", () => {
     const isSupported = (cmd) => {
         return document.queryCommandSupported(cmd);
-    };
+    };//Check support copy
     const range = document.createRange(),
         selection = window.getSelection();
     selection.removeAllRanges();
