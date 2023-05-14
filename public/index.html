@@ -32,7 +32,7 @@
                 </div> <!--END PROFILE-->
                 <div class=" p-0 w-[85%]  2xl:w-[80%]   mx-auto  mt-4">
                     <div
-                        class="group-chat  w-full max-h-64 sm:max-h-full lg:max-h-96 overflow-auto flex flex-col items-center gap-3 sm:gap-6 scrollbar-none scrollbar-thumb-transparent">
+                        class="group-chat  w-full max-h-64   sm:max-h-96 overflow-auto flex flex-col items-center gap-3 sm:gap-6 scrollbar-none scrollbar-thumb-transparent">
                         <!--Render JS-->
                     </div> <!--END Group chat-->
                     <div class="grid grid-cols-1  lg:gap-2 lg:grid-cols-2  ">
@@ -127,7 +127,7 @@
         <div
             class="create-group fixed top-0 z-20 w-full h-screen flex justify-center items-center invisible opacity-0  transition-all">
             <div
-                class="relative w-[90%] sm:w-[50%] sm:h-[40vh] lg:w-[30%] h-[50vh] bg-[#f5f5f5cc] backdrop-blur-md rounded-lg flex flex-col justify-center items-center gap-5 shadow-lg">
+                class="relative w-[90%] h-[60vh] sm:w-[50%] xl:w-[30%] lg:h-[50vh] sm:h-[40vh] bg-[#f5f5f5cc] backdrop-blur-md rounded-lg flex flex-col justify-center items-center gap-5 shadow-lg">
                 <i class="fa-solid fa-xmark close-create-group absolute top-3 right-3 text-3xl cursor-pointer"></i>
                 <div class="flex flex-col justify-center items-center gap-4">
                     <h1 class="text-3xl font-semibold">Chọn ảnh nhóm</h1>
@@ -140,11 +140,11 @@
                     </label>
                     <input id="file-upload" type="file" class="hidden" accept=".jpg, .png ,.jpeg" />
                 </div>
-                <div class="w-[90%] sm:w-[60%] lg:w-3/4 flex flex-col lg:flex-row items-center justify-center gap-3">
-                    <input type="text" placeholder=" Vui lòng nhập tên nhóm của bạn"
-                        class="name-group-input w-full h-10 lg:h-12 pl-3 text-lg outline-primary-color">
+                <div class="w-[90%] sm:w-[80%] lg:w-3/4 flex   items-center justify-center gap-3">
+                    <input type="text" placeholder="Vui lòng nhập tên nhóm của bạn"
+                        class="name-group-input w-full h-10 lg:h-12 pl-3 text-sm sm:text-lg outline-primary-color">
                     <button
-                        class="btn-create-group-official bg-primary-button text-white rounded-lg w-[40%] h-10  lg:w-20 lg:h-12 lg:text-xl">Tạo</button>
+                        class="btn-create-group-official bg-primary-button text-white rounded-sm py-2 px-4">Tạo</button>
                 </div>
             </div>
         </div> <!--END CREATE GROUP-->
@@ -162,7 +162,7 @@
         <div
             class="invite fixed top-0 z-20 w-full h-screen flex justify-center items-center invisible opacity-0 transition-all">
             <div
-                class="relative w-[90%] sm:w-[50%] lg:w-[20%] py-5 bg-primary-color backdrop-blur-md rounded-lg flex items-center justify-center gap-4 shadow-xl text-white">
+                class="relative w-[90%]  sm:w-[50%] xl:w-[25%] py-5 bg-primary-color backdrop-blur-md rounded-lg flex items-center justify-center gap-4 shadow-xl text-white">
                 <i
                     class="fa-solid fa-xmark close-invite absolute lg:top-3 lg:right-3 lg:text-2xl text-xl top-2 right-2 cursor-pointer"></i>
                 <h1 class="text-xl font-semibold">Mã mời:</h1>
