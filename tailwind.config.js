@@ -14,7 +14,12 @@ module.exports = {
         'primary-button': '#2A2F4F',
         'primary-header': '#9BA4B5'
       },
-
+      keyframes: {
+        skeletonLoading: {
+          '0%': { left: '-50%' },
+          '100%': { left: '50%' }
+        }
+      }
     },
   },
   plugins: [

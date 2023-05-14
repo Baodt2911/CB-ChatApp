@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, onAuthStateChanged, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, onSnapshot, orderBy, query, where, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js"
+import { getFirestore, collection, serverTimestamp, addDoc, getDocs, updateDoc, doc, onSnapshot, orderBy, query, where, arrayUnion, arrayRemove, limitToLast } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js"
 import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js"
 const firebaseConfig = {
     apiKey: "AIzaSyCLQMrKMIBQ1SSaVXnYOIA7xRWnaujqs3k",
@@ -24,7 +24,7 @@ const GoogleButton = document.querySelector(".btn-login-google")
 const LogOutButton = document.querySelector(".btn-logout")
 const FacebookProvider = new FacebookAuthProvider();
 const GoogleProvider = new GoogleAuthProvider()
-const avatarUser = document.querySelector(".avatar img")
+const avatarUser = document.querySelector(".avatar")
 const nameUser = document.querySelector(".name")
 const cardLogin = document.querySelector(".login")
 const btnCreateGroup = document.querySelector(".btn-create-group")
@@ -46,27 +46,33 @@ const groupChat = document.querySelector(".group-chat")
 const ChatRoom = document.querySelector(".chat-room")
 const notRoom = document.querySelector(".not-room")
 const btnOption = document.querySelector('.btn-option')
-const btnShowMember = document.querySelector('.btn-show-members')
-const cardOption = document.querySelector('.option')
 const cardShowMembers = document.querySelector('.show-members')
 const joinRoom = document.querySelector('.btn-join-room')
 const codeGroupJoin = document.querySelector('.code-group-input')
-const cancelRoom = document.querySelector('.cancel-room')
 const sendMessage = document.querySelector('.message-send')
 const btnSendMessage = document.querySelector('.btn-send-message')
 const cardChat = document.querySelector('.chat')
 const mainChat = document.querySelector('.main-chat')
+const notice = document.querySelector(".notice")
+const backToListRoom = document.querySelector('.back-to-list-room')
+const handleNotice = (text) => {
+    notice.classList.remove('invisible')
+    notice.classList.remove('opacity-0')
+    notice.classList.remove('-translate-y-56')
+    notice.innerHTML = text
+    setTimeout(() => {
+        notice.classList.add('invisible')
+        notice.classList.add('opacity-0')
+        notice.classList.add('-translate-y-56')
+    }, 3000)
+    notice.addEventListener('click', () => {
+        notice.classList.add('invisible')
+        notice.classList.add('opacity-0')
+        notice.classList.add('-translate-y-56')
+    })
+}
 document.addEventListener("click", e => {
-    if (btnOption.contains(e.target)) {
-        cardOption.classList.remove("invisible")
-        cardOption.classList.remove("opacity-0")
-    } else {
-        cardOption.classList.add("invisible")
-        cardOption.classList.add("opacity-0")
-    }
-})
-document.addEventListener("click", e => {
-    if (btnShowMember.contains(e.target) || cardShowMembers.contains(e.target)) {
+    if (btnOption.contains(e.target) || cardShowMembers.contains(e.target)) {
         cardShowMembers.classList.remove("invisible")
         cardShowMembers.classList.remove("opacity-0")
     } else {
@@ -74,7 +80,9 @@ document.addEventListener("click", e => {
         cardShowMembers.classList.add("opacity-0")
     }
 })
+
 coppyCode.addEventListener("click", () => {
+    coppyCode.innerText = "Đã sao chép"
     const isSupported = (cmd) => {
         return document.queryCommandSupported(cmd);
     };//Check support copy
@@ -85,7 +93,7 @@ coppyCode.addEventListener("click", () => {
     selection.addRange(range);
     try {
         if (isSupported("copy")) document.execCommand("copy");
-        else alert(`execCommand("copy") is not supported in your browser.`);
+        else handleNotice('execCommand("copy") is not supported in your browser.');
     } catch (e) {
         console.log(e);
     }
@@ -99,7 +107,7 @@ const handleAddFirestore = async (providerId, user) => {
         if (uid == doc.data().uid) {
             isAddDocs = false
         }
-    });
+    });// Có thể dùng some const isAddDocs = querySnapShot.some(doc => doc.data().uid == uid)
     if (isAddDocs) {
         addDoc(collection(db, "users"), {
             displayName: user.displayName,
@@ -124,17 +132,18 @@ LogOutButton.addEventListener("click", () => {
     window.location.reload();
 })
 const handleOnCard = (element) => {
-    element.classList.toggle("invisible")
-    element.classList.toggle("opacity-0")
+    element.classList.remove("invisible")
+    element.classList.remove("opacity-0")
 
 }
 const handleOffCard = (element) => {
-    element.classList.toggle("invisible")
-    element.classList.toggle("opacity-0")
+    element.classList.add("invisible")
+    element.classList.add("opacity-0")
     codeGroupJoin.value = ""
     showImages.src = ""
     nameGroupCreate.value = ""
     imagesUpload.value = ""
+    coppyCode.innerText = "Sao chép"
 }
 btnCreateGroup.addEventListener("click", () => handleOnCard(cardCreateGroup))
 btnJoinGroup.addEventListener("click", () => handleOnCard(cardJoinGroup))
@@ -152,14 +161,16 @@ imagesUpload.addEventListener("change", (e) => {
         showImages.src = srcImg
         return;
     }
-    alert("Không hỗ trợ định dạng ảnh này")
+    handleNotice('Sai định dạng ảnh')
 })
 
 const getCurrentUser = (callback) => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
+            avatarUser.classList.remove('loading-avatar')
+            avatarUser.classList.add('active-user')
             nameUser.innerText = user.displayName
-            avatarUser.src = user.photoURL
+            avatarUser.querySelector('img').src = user.photoURL
             cardLogin.style.display = "none"
             callback(user)
         } else {
@@ -170,23 +181,25 @@ const getCurrentUser = (callback) => {
 }
 
 getCurrentUser((currentUser) => {
-    let date = new Date()
+    const formatDate = (seconds) => {
+        let date = new Date(seconds * 1000)
+        let minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
+        let data = `${date.getHours()}:${minutes}`
+        return data;
+    }
     const handleRenderRooms = (datas) => {
         const html = datas.map(data =>
             `
                <div class="item-group-chat" data-code=${data.roomCode}>
-                    <div class="avatar-group-chat basis-1/6 lg:basis-[17%] h-full">
+                    <div class="avatar-group-chat ">
                        <img src=${data.photoURL} alt="group-avatar" class="w-full h-full object-cover rounded-full border ">
                    </div>
-                       <div class="lg:basis-[75%] basis-3/4 ">
+                       <div class="flex-grow pr-3">
                            <p
-                               class="w-52 name-group text-xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
+                               class="w-32 sm:w-52 name-group text-lg lg:text-xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
                                ${data.roomName}</p>
                                <div class="currentMessage flex items-center justify-between">
-                               <p
-                                            class="w-40 text-sm font-sans font-thin text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">
-                                            Chào bạn</p>
-                                        <span class="text-xs">12:53</span>
+
                                </div>
                            </div>
                        </div>
@@ -194,12 +207,45 @@ getCurrentUser((currentUser) => {
         groupChat.innerHTML = html.join("")
         const itemRoom = document.querySelectorAll(".item-group-chat")
         itemRoom.forEach(room => room.addEventListener("click", handleRenderChatMessage))
+        if (document.querySelector('body').offsetWidth < 1024) {//Khi màn hình nhỏ hơn 640px
+            itemRoom.forEach(room => room.addEventListener("click", () => {
+                document.querySelector('.content').scrollLeft = document.querySelector('body').offsetWidth
+                handleNotice(`<i class="fa-solid fa-chevron-left"></i>
+                Vuốt sang bên để quay lại`)
+            }))
+            backToListRoom.addEventListener('click', () => {
+                document.querySelector('.content').scrollLeft = - document.querySelector('body').offsetWidth
+            })
+        }
+        datas.forEach(data => {
+            const queryMessages = query(collection(db, "messages"), where("roomCode", "==", data.roomCode), orderBy("createdAt", "asc"), limitToLast(1))//Lấy tin nhắn cuối cùng
+            onSnapshot(queryMessages, (snapshot) => {
+                const data = snapshot.docs.map(doc => ({
+                    ...doc.data()
+                }))
+                if (data.length == 0) {
+                    return
+                }
+                itemRoom.forEach(rooms => {
+                    if (rooms.dataset.code == data[0].roomCode) {
+                        rooms.querySelector('.currentMessage').innerHTML = `
+                        <p class="w-32 sm:w-96 lg:w-40 text-xs font-sans font-normal text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">
+                        <span class="lg:text-sm font-semibold">${data[0].displayName}</span> : ${data[0].text}</p>
+                        <span class="text-[10px] sm:text-xs">${formatDate(data[0]?.createdAt?.seconds)}</span>
+                        `
+                    }
+                })
+            })
+        })
     }
     const collectionRooms = query(collection(db, "rooms"), where("members", "array-contains", currentUser.uid), orderBy("createdAt", "desc")) //Lấy dữ liệu theo thời gian tạo room
     onSnapshot(collectionRooms, (querySnapshot) => {//Lắng nghe dữ liệu của users khi thay đổi và tự động trả về database
         const data = querySnapshot.docs.map(doc => ({
             ...doc.data()
         }))
+        if (data.length == 0) {
+            return
+        }
         handleRenderRooms(data)
     });
     const randomRoomCode = () => {
@@ -225,9 +271,10 @@ getCurrentUser((currentUser) => {
             const storageRef = ref(storage, imagesUpload.files[0].name);
             uploadBytes(storageRef, imagesUpload.files[0]).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
+                handleNotice('Tạo nhóm thành công')
                 addDoc(collection(db, "rooms"),
                     {
-                        createdAt: date,
+                        createdAt: serverTimestamp(),
                         roomCode: roomCode,
                         roomName: nameGroupCreate.value,
                         photoURL: `https://firebasestorage.googleapis.com/v0/b/chat-app-db76c.appspot.com/o/${imagesUpload.files[0].name}?alt=media`,
@@ -237,9 +284,7 @@ getCurrentUser((currentUser) => {
             });
         }
     }
-    createGroup.addEventListener("click", () => {
-        handleCreateRooms()
-    })
+    createGroup.addEventListener("click", handleCreateRooms)
     nameGroupCreate.addEventListener("keypress", e => {
         if (e.key == "Enter") {
             handleCreateRooms()
@@ -256,17 +301,21 @@ getCurrentUser((currentUser) => {
                 return
             }
             callback(data)
+            roomCode = '' //Clear roomCode
         })
     }
     const handleRenderChatMessage = (e) => {
         const roomCode = e.currentTarget.dataset.code
         roomCode ? notRoom.style.display = "none" : notRoom.style.display = "flex"
         ChatRoom.style.display = 'flex'
-        getDataWithRoomCode(roomCode, (data) => {
+        getDataWithRoomCode(roomCode, (data) => {//Render Memmber Rooms
             ChatRoom.querySelector('p').innerText = data[0].roomName
             ChatRoom.querySelector('.image-room').src = data[0].photoURL
             codeGroup.innerText = data[0].roomCode
-            const collectionUsers = query(collection(db, 'users'), where("uid", "in", data[0].members), orderBy("displayName", "desc")) //Lấy ra user có trong phòng 'data.members phải làm một mảng vì dùng query in'
+            if (data[0].members.length == 0) {
+                return
+            }
+            const collectionUsers = query(collection(db, 'users'), where("uid", "in", data[0]?.members), orderBy("displayName", "desc")) //Lấy ra user có trong phòng 'data.members phải làm một mảng vì dùng query in'
             onSnapshot(collectionUsers, (querySnapshot) => {//Lắng nghe dữ liệu của users khi thay đổi và tự động trả về 
                 const datas = querySnapshot.docs.map(doc => ({
                     ...doc.data(),
@@ -281,36 +330,30 @@ getCurrentUser((currentUser) => {
                 cardShowMembers.innerHTML = html.join('')
             });
         })
-        const formatDate = (seconds) => {
-            let date = new Date(seconds * 1000)
-            let minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
-            let data = `${date.getHours()}:${minutes}`
-            return data;
-        }
-
         const queryMessages = query(collection(db, "messages"), where("roomCode", "==", roomCode), orderBy("createdAt", "asc"))
         onSnapshot(queryMessages, (querySnapshot) => {
             const datas = querySnapshot.docs.map(doc => ({
                 ...doc.data(),
             }))
-            // console.log(datas[0].roomCode);
             const html = datas.map(data =>
-                `<div class="item-message py-5 " data-id=${data.uid}>
-                <div class="avatar-user-message w-12 h-12 rounded-full ">
+                `<div class="item-message " data-id=${data.uid}>
+                <div class="avatar-user-message  w-7 h-7 lg:w-12 lg:h-12 rounded-full ">
                     <img src=${data.photoURL} alt="avatar" class="bdt-images ">
                 </div>
-                <div class="title-message  max-w-[50%]">
+                <div class="title-message  max-w-[70%] sm:max-w-[50%]">
                     <p class="name-message-user">${data.displayName}</p>
-                    <div class="message-card w-full flex items-center  gap-4">
+                    <div class="message-card w-full flex items-center gap-2 lg:gap-4">
                         <section class="message-text" >
                             ${data.text}
                         </section>
-                        <span class="time-send font-normal text-sm  font-sans opacity-75">${formatDate(data.createdAt.seconds)}</span>
+                        <span class="time-send font-normal text-[10px] lg:text-sm  font-sans opacity-75">${formatDate(data.createdAt?.seconds)}</span>
                     </div>
                 </div>
             </div>`
             )
             cardChat.innerHTML = html.join('')
+            cardChat.classList.remove('loading-message')
+            mainChat.classList.remove('overflow-hidden')
             const uidMessageEqualuidUser = document.querySelectorAll(".item-message")
             uidMessageEqualuidUser.forEach(message => {
                 if (message.dataset.id == currentUser.uid) {
@@ -332,45 +375,32 @@ getCurrentUser((currentUser) => {
                     members: arrayUnion(currentUser.uid)
                 })
                 handleOffCard(cardJoinGroup)
-                console.log("Đã vào phòng");
+                handleNotice('Đã vào phòng')
             } catch (error) {
                 console.log("Error: ", error);
+                console.log("cccc");
             }
         })
     }
-    cancelRoom.addEventListener("click", (e) => {
-        notRoom.style.display = "flex"
-        ChatRoom.style.display = 'none'
-        const roomCode = codeGroup.innerHTML
-        getDataWithRoomCode(roomCode, async (data) => {
-            const ref = doc(db, "rooms", data[0].id)
-            try {
-                await updateDoc(ref, {
-                    members: arrayRemove(currentUser.uid)
-                });
-                console.log("Đã rời phòng");
-            } catch (error) {
-                console.log("Error: ", error);
-            }
-        })
-    })
     joinRoom.addEventListener('click', handleJoinRoom)
     codeGroupJoin.addEventListener("keypress", e => {
         if (e.key == "Enter") {
-            handleCreateRooms()
+            handleJoinRoom()
         }
     })
     const handleSendMessage = () => {
         const roomCode = codeGroup.innerHTML
         const messageText = sendMessage.value
-        addDoc(collection(db, "messages"), {
-            createdAt: date,
-            displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
-            roomCode: roomCode,
-            text: messageText,
-            uid: currentUser.uid
-        })
+        if (messageText) {
+            addDoc(collection(db, "messages"), {
+                createdAt: serverTimestamp(),
+                displayName: currentUser.displayName,
+                photoURL: currentUser.photoURL,
+                roomCode: roomCode,
+                text: messageText,
+                uid: currentUser.uid
+            })
+        }
         sendMessage.value = ''
         mainChat.scrollTo({ top: mainChat.scrollHeight, behavior: 'smooth' });
     }

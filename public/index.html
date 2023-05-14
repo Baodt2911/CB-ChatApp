@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="https://i.pinimg.com/originals/80/99/53/8099534fb73c69ff7a54207ebafefc83.jpg">
     <title>Chat App | CB</title>
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/output.css" type="text/css">
@@ -14,88 +15,72 @@
 
 <body>
     <main
-        class=" w-full h-screen bg-gradient-to-l from-color-gradient-1 to-color-gradient-2 font-saira flex items-center justify-center lg:py-20 ">
-        <div class="content lg:w-3/4 w-full h-full  rounded-xl  flex items-center">
-            <div class="basis-1/3  h-full bg-primary-color rounded-s-xl text-white ">
+        class="relative w-full h-screen bg-gradient-to-l from-color-gradient-1 to-color-gradient-2 font-saira flex items-center justify-center 2xl:py-20 ">
+        <div
+            class="content w-full  2xl:w-3/4  h-full  rounded-xl  flex items-center overflow-x-scroll scrollbar-none snap-mandatory snap-x scroll-smooth ">
+            <div
+                class="basis-full  lg:basis-[34%] flex-shrink-0 flex-grow-0 h-full  bg-primary-color rounded-s-xl text-white snap-center">
                 <div class="w-full ">
                     <button
-                        class="btn-logout border border-gray-400 py-1 px-5 rounded-sm lg:ml-7 lg:my-6 ml-3 my-4">Đăng
+                        class="btn-logout border border-gray-400 py-1 px-5 rounded-sm sm:ml-7 sm:my-6 ml-3 mt-3 mb-6">Đăng
                         xuất</button>
                     <div
-                        class="avatar relative w-32 h-32 lg:w-40 lg:h-40 border-2 border-gray-300 rounded-full mx-auto after:absolute after:bottom-3 after:right-3 after:w-5 after:h-5 after:rounded-full after:bg-green-400 z-10  after:border-2 after:border-white">
+                        class="avatar  loading-avatar w-32 h-32  sm:w-40 sm:h-40 border-2 border-gray-300 rounded-full mx-auto ">
                         <img src="" alt="avatar" class="bdt-images bg-white">
                     </div>
-                    <p class="name text-2xl font-semibold text-center mt-5">Đỗ Bảo</p>
+                    <p class="name text-xl sm:text-2xl font-semibold text-center mt-3 lg:mt-5"></p>
                 </div> <!--END PROFILE-->
-                <div class="w-full p-2 lg:p-0 lg:w-3/4  mx-auto  mt-4">
-                    <div class="group-chat  w-full max-h-96 overflow-auto flex flex-col items-center gap-6 scrollbar-none scrollbar-thumb-transparent
-                        ">
-                        <!-- <div class="item-group-chat">
-                            <div class="avatar-group-chat basis-1/6 lg:basis-[18%] h-full">
-                                <img src="https://thuvienanime.com/wp-content/uploads/2021/10/thach-hao-thegioihoanmy.jpeg"
-                                    alt="group-avatar" class="w-full h-full object-cover rounded-lg border ">
-                            </div>
-                            <div class="title-group-chat lg:basis-[75%] basis-3/4 ">
-                                <p
-                                    class="w-52 name-group text-xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
-                                    Nhóm bất hảo</p>
-                                <div class="currentMessage flex items-center justify-between">
-                                    <p
-                                        class="w-40 text-sm font-sans font-thin text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">
-                                        Chào bạn</p>
-                                    <span class="text-xs">12:53</span>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-ellipsis-vertical cursor-pointer" title="Option"></i>
-                        </div> -->
+                <div class=" p-0 w-[85%]  2xl:w-[80%]   mx-auto  mt-4">
+                    <div
+                        class="group-chat  w-full max-h-64 sm:max-h-full lg:max-h-96 overflow-auto flex flex-col items-center gap-3 sm:gap-6 scrollbar-none scrollbar-thumb-transparent">
+                        <!--Render JS-->
                     </div> <!--END Group chat-->
-                    <div class="grid lg:grid-cols-2 lg:gap-2 grid-cols-1 grid-row-2 gap-0">
+                    <div class="grid grid-cols-1  lg:gap-2 lg:grid-cols-2  ">
                         <button
-                            class="btn-create-group border-none bg-primary-button text-white  py-2 px-4  rounded-sm mt-3"><i
+                            class="btn-create-group border-none bg-primary-button text-white sm:text-sm py-2 px-4  rounded-sm mt-3"><i
                                 class="fa-solid fa-plus mr-2"></i>
                             Tạo nhóm chat mới</button>
                         <button
-                            class="btn-join-group border-none bg-primary-button text-white  py-2 px-4  rounded-sm mt-3"><i
+                            class="btn-join-group border-none bg-primary-button text-white sm:text-sm py-2 px-4  rounded-sm mt-3"><i
                                 class="fa-solid fa-plus mr-2"></i>
                             Vào nhóm</button>
                     </div>
                 </div> <!--END GROUP-->
             </div>
-            <div class="card-group-chat  basis-4/6  h-full  bg-white rounded-e-xl">
+            <div
+                class="card-group-chat  basis-full   lg:basis-[66%] flex-shrink-0 snap-center   h-full  bg-white rounded-e-xl">
                 <div class="chat-room relative w-full h-full bg-white rounded-e-xl flex flex-col "
                     style="display: none;">
-                    <header class="w-full basis-[10%] border-b-2 border-gray-200 flex items-center">
-                        <div class=" lg:basis-4/5 basis-[65%] h-full flex items-center gap-3 ml-3">
-                            <div class="lg:w-14 lg:h-14 w-12 h-12 rounded-full border">
+                    <header class="w-full basis-[10%]  border-b-2 border-gray-200 flex items-center">
+                        <div class=" basis-[60%] sm:basis-4/5  h-full flex items-center gap-1 sm:gap-3 ml-3">
+                            <span class="back-to-list-room lg:hidden  text-xl"><i
+                                    class="fa-solid fa-chevron-left "></i></span>
+                            <div class="w-12 h-12 sm:w-14 sm:h-14  rounded-full border">
                                 <img src="./group-images.jpg" alt="" class="bdt-images image-room">
                             </div>
-                            <p class="text-2xl font-semibold tracking-widest">Nhóm bất hảo</p>
+                            <p class="sm:text-2xl font-semibold sm:tracking-widest tracking-normal">
+                            </p>
                         </div>
-                        <div class="flex-grow h-full flex items-center justify-around ">
+                        <div class="flex-grow h-full flex items-center sm:justify-around justify-end gap-1">
                             <div
-                                class="btn-invite border border-gray-200 py-2 px-4 text-gray-500 cursor-pointer hover:text-black hover:border-black transition duration-500">
-                                <i class="fa-solid fa-user-plus text-xl mr-2 "></i>Mời
+                                class="btn-invite text-sm sm:text-base border border-gray-200 py-1 px-2 sm:py-2 sm:px-4 text-gray-500 cursor-pointer hover:text-black hover:border-black transition duration-500">
+                                <i class="fa-solid fa-user-plus text-sm sm:text-xl mr-2 "></i>Mời
                             </div>
-                            <i class="fa-solid fa-ellipsis-vertical cursor-pointer btn-option" title="Option"></i>
+                            <i class="fa-solid fa-ellipsis-vertical px-2 lg:cursor-pointer btn-option"
+                                title="Option"></i>
                         </div>
                         <ul
-                            class="option absolute top-[75px] right-2 bg-[#f5f5f5] w-[140px] rounded-lg shadow-lg text-lg py-2 invisible opacity-0 transition-all">
-                            <li class="border-b border-gray-300  px-5 cursor-pointer btn-show-members">Xem thành viên
-                            </li>
-                            <li class="cancel-room text-red-500 px-5 cursor-pointer">Rời nhóm</li>
-                        </ul> <!--END OPTTION-->
-                        <ul
-                            class="show-members absolute z-10 top-[75px] right-5 bg-[#f5f5f5] w-[250px] max-h-[50vh] rounded-lg shadow-lg text-lg py-5 border flex flex-col items-center gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200 invisible opacity-0 transition-all">
-                            <li class="w-[90%] flex items-center gap-2">
+                            class="show-members absolute z-10 top-[70px] sm:top-[100px] lg:top-[75px] right-0 bg-[#f5f5f5] w-[200px] sm:w-[250px] max-h-[50vh] rounded-lg shadow-lg text-lg py-5 border flex flex-col items-center gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200 invisible opacity-0 transition-all">
+                            <!-- <li class="w-[90%] flex items-center gap-2">
                                 <img src="https://lh3.googleusercontent.com/a/AGNmyxYKmdOjXQuC-rzbtH_xZ8tVSI3IoE_vuWYh1oQtAA=s96-c"
                                     alt="" class="w-12 h-12 rounded-full object-cover flex-shrink-0 flex-grow-0">
-                                <p class="overflow-hidden whitespace-nowrap text-ellipsis">Đỗ Bảo</p>
-                            </li>
+                                <p class="overflow-hidden whitespace-nowrap text-ellipsis ">Đỗ Bảo</p>
+                            </li> -->
                         </ul><!--END SHOW_MEMBERS-->
                     </header> <!--END header-->
                     <div
-                        class="main-chat basis-[83%]  flex items-end h-full overflow-y-auto  scrollbar-thin scrollbar-thumb-[#dadada] ">
-                        <div class="chat grid grid-cols-1 w-full max-h-full ">
+                        class="main-chat  basis-[83%]  flex items-end h-full overflow-y-auto overflow-hidden scrollbar-thin scrollbar-thumb-[#dadada] ">
+                        <div class="chat grid grid-cols-1 w-full max-h-full loading-message ">
                             <!-- <div class="item-message">
                                 <div class=" w-12 h-12 rounded-full">
                                     <img src="./img.png" alt="avatar" class="bdt-images ">
@@ -112,9 +97,9 @@
                             </div> -->
                         </div>
                     </div><!--END CHAT-->
-                    <div class=" w-full basis-[7%] border-t border-gray-200 flex items-center justify-between pr-4">
+                    <div class=" w-full basis-[7%] border-t border-gray-200 flex items-center justify-between pr-4 ">
                         <input type="text" wrap="soft" placeholder="Nhập tin nhắn"
-                            class="message-send w-full h-full outline-none border-none text-xl pl-6 z-10">
+                            class="message-send w-full h-full outline-none border-none text-xl pl-6 z-10 bg-transparent">
                         <i
                             class="fa-regular fa-paper-plane text-xl cursor-pointer hover:text-blue-400 ml-6 btn-send-message"></i>
                     </div>
@@ -122,66 +107,74 @@
                 <div class="not-room w-full h-full flex flex-col items-center justify-center gap-10">
                     <img src="https://i.pinimg.com/originals/80/99/53/8099534fb73c69ff7a54207ebafefc83.jpg" alt=""
                         class="w-52  object-cover">
-                    <h1 class="text-4xl font-semibold tracking-[5px] text-gray-500">Bạn chưa vào nhóm nào!</h1>
-                </div> <!--NOT JOIN GROUPS-->
+                    <h1 class="lg:text-4xl text-2xl font-semibold tracking-[5px] text-gray-500">Bạn chưa vào nhóm nào!
+                    </h1>
+                </div> <!--  NOT JOIN GROUPS -->
+                <!--END BACK TO ROOM-->
             </div> <!--END CHAT-->
         </div> <!--END CONTENT-->
-    </main> <!--END MAIN-->
-    <div class="login fixed top-0 z-20 w-full h-screen flex justify-center items-center bg-[#f5f5f5cc] backdrop-blur-md"
-        style="display: none;">
-        <div class="w-[30%] py-10 rounded-lg flex flex-col items-center gap-4 bg-primary-color text-white">
-            <h1 class="text-3xl font-semibold">Đăng nhập Group Chat</h1>
-            <div class="w-full flex flex-col items-center gap-3">
-                <button class="btn-login-facebook border w-1/2 py-2 rounded-sm">Đăng nhập bằng Facebook</button>
-                <button class="btn-login-google border w-1/2 py-2 rounded-sm">Đăng nhập bằng Google</button>
-            </div>
-        </div>
-    </div><!--END LOGIN-->
-    <div
-        class="create-group fixed top-0 z-20 w-full h-screen flex justify-center items-center invisible opacity-0  transition-all">
-        <div
-            class="relative w-[30%] h-[50vh] bg-[#f5f5f5cc] backdrop-blur-md rounded-lg flex flex-col justify-center items-center gap-10 shadow-lg">
-            <i class="fa-solid fa-xmark close-create-group absolute top-3 right-3 text-3xl cursor-pointer"></i>
-            <div class="flex flex-col justify-center items-center gap-5">
-                <h1 class="text-3xl font-semibold">Chọn ảnh nhóm</h1>
-                <div class="show-images-group w-40 h-40 border border-primary-color rounded-full">
-                    <img src="" alt="" class="bdt-images">
+        <div class="login fixed top-0 z-20 w-full h-screen flex justify-center items-center bg-[#f5f5f5cc] backdrop-blur-md"
+            style="display: none;">
+            <div
+                class="w-[90%] lg:w-[30%]  py-10 rounded-lg flex flex-col items-center gap-4 bg-primary-color text-white">
+                <h1 class="text-3xl font-semibold">Đăng nhập Group Chat</h1>
+                <div class="w-full flex flex-col items-center gap-3">
+                    <button class="btn-login-facebook border w-1/2 py-2 rounded-sm">Đăng nhập bằng Facebook</button>
+                    <button class="btn-login-google border w-1/2 py-2 rounded-sm">Đăng nhập bằng Google</button>
                 </div>
-                <label for="file-upload"
-                    class="cursor-pointer text-lg text-white border border-blue-500 py-2 p-6 bg-blue-500 rounded-lg">
-                    <i class="fa fa-cloud-upload mr-1"></i> Chọn ảnh
-                </label>
-                <input id="file-upload" type="file" class="hidden" accept=".jpg, .png ,.jpeg" />
             </div>
-            <div class="w-3/4 flex items-center justify-center gap-2">
-                <input type="text" placeholder=" Vui lòng nhập tên nhóm của bạn"
-                    class="name-group-input w-full h-12 pl-3 text-lg outline-primary-color">
-                <button
-                    class="btn-create-group-official bg-primary-button text-white rounded-lg  w-20 h-12 text-xl">Tạo</button>
+        </div><!--END LOGIN-->
+        <div
+            class="create-group fixed top-0 z-20 w-full h-screen flex justify-center items-center invisible opacity-0  transition-all">
+            <div
+                class="relative w-[90%] sm:w-[50%] sm:h-[40vh] lg:w-[30%] h-[50vh] bg-[#f5f5f5cc] backdrop-blur-md rounded-lg flex flex-col justify-center items-center gap-5 shadow-lg">
+                <i class="fa-solid fa-xmark close-create-group absolute top-3 right-3 text-3xl cursor-pointer"></i>
+                <div class="flex flex-col justify-center items-center gap-4">
+                    <h1 class="text-3xl font-semibold">Chọn ảnh nhóm</h1>
+                    <div class="show-images-group w-40 h-40 border border-primary-color rounded-full">
+                        <img src="" alt="" class="bdt-images">
+                    </div>
+                    <label for="file-upload"
+                        class="cursor-pointer  lg:text-lg text-white border border-blue-500 py-2 p-6 bg-blue-500 rounded-lg">
+                        <i class="fa fa-cloud-upload mr-1"></i> Chọn ảnh
+                    </label>
+                    <input id="file-upload" type="file" class="hidden" accept=".jpg, .png ,.jpeg" />
+                </div>
+                <div class="w-[90%] sm:w-[60%] lg:w-3/4 flex flex-col lg:flex-row items-center justify-center gap-3">
+                    <input type="text" placeholder=" Vui lòng nhập tên nhóm của bạn"
+                        class="name-group-input w-full h-10 lg:h-12 pl-3 text-lg outline-primary-color">
+                    <button
+                        class="btn-create-group-official bg-primary-button text-white rounded-lg w-[40%] h-10  lg:w-20 lg:h-12 lg:text-xl">Tạo</button>
+                </div>
             </div>
-        </div>
-    </div> <!--END CREATE GROUP-->
-    <div
-        class="join-group fixed top-0 z-20 w-full h-screen flex justify-center items-center  invisible opacity-0 transition-all ">
+        </div> <!--END CREATE GROUP-->
         <div
-            class="relative w-[20%] py-5 bg-[#f5f5f5cc] backdrop-blur-md rounded-lg flex flex-col justify-center items-center gap-5 shadow-xl">
-            <i class="fa-solid fa-xmark close-join-group absolute top-3 right-3 text-2xl cursor-pointer"></i>
-            <h1 class="uppercase text-2xl font-semibold">Nhập mã nhóm</h1>
-            <input type="text" class="code-group-input uppercase text-xl w-3/4 h-12 pl-3 outline-primary-color"
-                placeholder="Vd:SVFRTA">
-            <button class="btn-join-room bg-blue-500 text-white py-2 px-10 rounded-lg">Vào nhóm</button>
-        </div>
-    </div> <!--END JOIN GROUP-->
-    <div
-        class="invite fixed top-0 z-20 w-full h-screen flex justify-center items-center invisible opacity-0 transition-all">
+            class="join-group fixed top-0 z-20 w-full h-screen flex justify-center items-center  invisible opacity-0 transition-all ">
+            <div
+                class="relative  w-[90%] sm:w-[50%] lg:w-[20%] py-5 bg-[#f5f5f5cc] backdrop-blur-md rounded-lg flex flex-col justify-center items-center gap-5 shadow-xl">
+                <i class="fa-solid fa-xmark close-join-group absolute top-3 right-3 text-2xl cursor-pointer"></i>
+                <h1 class="uppercase text-2xl font-semibold">Nhập mã nhóm</h1>
+                <input type="text" class="code-group-input uppercase text-xl w-3/4 h-12 pl-3 outline-primary-color"
+                    placeholder="Vd:SVFRTA">
+                <button class="btn-join-room bg-blue-500 text-white py-2 px-10 rounded-lg">Vào nhóm</button>
+            </div>
+        </div> <!--END JOIN GROUP-->
         <div
-            class="relative w-[20%] py-5 bg-primary-color backdrop-blur-md rounded-lg flex items-center justify-center gap-3 shadow-xl text-white">
-            <i class="fa-solid fa-xmark close-invite absolute top-3 right-3 text-2xl cursor-pointer"></i>
-            <h1 class="text-xl font-semibold">Mã mời:</h1>
-            <span class="code-group bg-white py-1 px-5 text-black tracking-widest"></span>
-            <button class="coppy-code border bg-primary-button border-white text-sm py-1 px-[12px]">Coppy</button>
-        </div>
-    </div><!--END INVITE -->
+            class="invite fixed top-0 z-20 w-full h-screen flex justify-center items-center invisible opacity-0 transition-all">
+            <div
+                class="relative w-[90%] sm:w-[50%] lg:w-[20%] py-5 bg-primary-color backdrop-blur-md rounded-lg flex items-center justify-center gap-4 shadow-xl text-white">
+                <i
+                    class="fa-solid fa-xmark close-invite absolute lg:top-3 lg:right-3 lg:text-2xl text-xl top-2 right-2 cursor-pointer"></i>
+                <h1 class="text-xl font-semibold">Mã mời:</h1>
+                <span class="code-group bg-white py-1 px-5 text-black tracking-widest"></span>
+                <button class="coppy-code border bg-primary-button border-white text-sm py-1 px-[12px]">Sao
+                    chép</button>
+            </div>
+        </div><!--END INVITE -->
+        <p
+            class="notice fixed z-30 top-3 left-1/2  px-5 h-12 bg-white rounded-full shadow-md  text-center leading-[45px]  transition-all duration-500 -translate-y-56 -translate-x-1/2 invisible opacity-0 overflow-hidden cursor-pointer border-2 border-primary-color text-xs">
+        </p><!--END NOTICE-->
+    </main> <!--END MAIN-->
 </body>
 
 </html>
